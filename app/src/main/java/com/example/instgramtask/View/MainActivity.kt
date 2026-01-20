@@ -1,5 +1,6 @@
 package com.example.instgramtask.View
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.instgramtask.Model.ApiState
 import com.example.instgramtask.R
 import com.example.instgramtask.ViewModel.FeedViewModel
@@ -33,6 +35,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.rvFeed.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+            viewModel.refresh()
+        }
+
+        setupAutoPlay()
+
+
+
         setupRecyclerView()
         observeFeed()
     }
@@ -47,29 +59,68 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun observeFeed() {
         lifecycleScope.launch {
             viewModel.posts.collect { state ->
                 when (state) {
+
                     is ApiState.Loading -> {
-                        binding.shimmerLayout.startShimmer()
-                        binding.shimmerLayout.visibility = View.VISIBLE
-                        binding.rvFeed.visibility = View.GONE
+                        if (!binding.swipeRefresh.isRefreshing) {
+                            binding.progressBar.visibility = View.VISIBLE
+                            binding.rvFeed.visibility = View.GONE
+                        }
                     }
 
                     is ApiState.Success -> {
-                        binding.shimmerLayout.stopShimmer()
-                        binding.shimmerLayout.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
+                        binding.swipeRefresh.isRefreshing = false
                         binding.rvFeed.visibility = View.VISIBLE
                         feedAdapter.submitList(state.data)
                     }
 
                     is ApiState.Error -> {
-                        binding.shimmerLayout.stopShimmer()
+                        binding.progressBar.visibility = View.GONE
+                        binding.swipeRefresh.isRefreshing = false
                         Toast.makeText(this@MainActivity, state.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
     }
+
+
+    private fun setupAutoPlay() {
+        binding.rvFeed.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val first = layoutManager.findFirstVisibleItemPosition()
+                val last = layoutManager.findLastVisibleItemPosition()
+
+                for (i in first..last) {
+                    val holder = recyclerView.findViewHolderForAdapterPosition(i)
+
+                    if (holder is FeedAdapter.VideoViewHolder) {
+                        if (isFullyVisible(holder.itemView)) {
+                            holder.play()
+                        } else {
+                            holder.pause()
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    private fun isFullyVisible(view: View): Boolean {
+        val rect = Rect()
+        view.getGlobalVisibleRect(rect)
+        return rect.height() >= view.height
+    }
+
+
+
 }

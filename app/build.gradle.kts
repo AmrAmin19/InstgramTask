@@ -82,6 +82,8 @@ dependencies {
     implementation( "androidx.constraintlayout:constraintlayout:2.1.4")
     implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
 
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
 
 
 }

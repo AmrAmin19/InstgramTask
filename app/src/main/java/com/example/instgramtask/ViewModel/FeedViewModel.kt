@@ -25,7 +25,12 @@ class FeedViewModel @Inject constructor(
         loadPosts()
     }
 
-    private fun loadPosts() {
+    fun refresh() {
+        loadPosts()
+    }
+
+
+     fun loadPosts() {
         viewModelScope.launch {
             repo.getPosts().collect { state ->
                 _posts.value = state

@@ -30,6 +30,8 @@ class PostDiff : DiffUtil.ItemCallback<Post>() {
 class FeedAdapter :
     ListAdapter<Post, RecyclerView.ViewHolder>(PostDiff()) {
 
+
+
     companion object {
         private const val TYPE_IMAGE = 0
         private const val TYPE_VIDEO = 1
@@ -120,12 +122,23 @@ class FeedAdapter :
         }
 
 
+        fun play() {
+            player?.playWhenReady = true
+        }
+
+        fun pause() {
+            player?.playWhenReady = false
+        }
+
+
+
         fun releasePlayer() {
             player?.release()
             player = null
             binding.videoPost.player = null
         }
     }
+
 
 
 }

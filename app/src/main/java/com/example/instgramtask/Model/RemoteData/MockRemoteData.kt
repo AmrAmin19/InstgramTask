@@ -45,7 +45,7 @@ class MockRemoteData @Inject constructor() : ImockRemote {
                 timestamp = System.currentTimeMillis()
             ),    Post(
                 id = "3",
-                username = "zyad_dev",
+                username = "Amr_dev",
                 caption = "Hello feed 👋",
                 media = listOf(
                     Media(
