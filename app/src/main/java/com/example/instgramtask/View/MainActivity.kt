@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var feedAdapter: FeedAdapter
 
+    private var currentPlayingHolder: FeedAdapter.VideoViewHolder? = null
+
+
     private val viewModel: FeedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,22 +106,45 @@ class MainActivity : AppCompatActivity() {
                 for (i in first..last) {
                     val holder = recyclerView.findViewHolderForAdapterPosition(i)
 
-                    if (holder is FeedAdapter.VideoViewHolder) {
-                        if (isFullyVisible(holder.itemView)) {
+                    if (holder is FeedAdapter.VideoViewHolder && isFullyVisible(holder.itemView)) {
+
+                        // 🔴 Pause previously playing video
+                        if (currentPlayingHolder != holder) {
+                            currentPlayingHolder?.pause()
+                            currentPlayingHolder = holder
                             holder.play()
-                        } else {
-                            holder.pause()
                         }
+                        return // IMPORTANT: only one video
                     }
                 }
+
+                // If no video fully visible, pause current
+                currentPlayingHolder?.pause()
+                currentPlayingHolder = null
             }
         })
     }
+
+
+
 
     private fun isFullyVisible(view: View): Boolean {
         val rect = Rect()
         view.getGlobalVisibleRect(rect)
         return rect.height() >= view.height
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        currentPlayingHolder?.pause()
+        currentPlayingHolder = null
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.rvFeed.adapter = null
     }
 
 

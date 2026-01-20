@@ -84,6 +84,10 @@ dependencies {
 
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation("com.google.android.exoplayer:extension-okhttp:2.19.1")
+
+
 
 
 }

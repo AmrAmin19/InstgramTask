@@ -21,7 +21,7 @@ class MockRemoteData @Inject constructor() : ImockRemote {
         listOf(
             Post(
                 id = "1",
-                username = "zyad_dev",
+                username = "Amr",
                 caption = "Hello feed 👋",
                 media = listOf(
                     Media(
@@ -50,7 +50,7 @@ class MockRemoteData @Inject constructor() : ImockRemote {
                 media = listOf(
                     Media(
                         type = MediaType.IMAGE,
-                        uri = "android.resource://com.example.instgramtask/drawable/i1"
+                        uri = "android.resource://com.example.instgramtask/drawable/i2"
                     )
                 ),
                 timestamp = System.currentTimeMillis()
@@ -62,19 +62,19 @@ class MockRemoteData @Inject constructor() : ImockRemote {
                 media = listOf(
                     Media(
                         type = MediaType.VIDEO,
-                        uri = "android.resource://com.example.instgramtask/raw/v2",
+                        uri = "android.resource://com.example.instgramtask/raw/v3",
                         durationMs = 15000
                     )
                 ),
                 timestamp = System.currentTimeMillis()
             ),    Post(
                 id = "5",
-                username = "zyad_dev",
+                username = "Amr",
                 caption = "Hello feed 👋",
                 media = listOf(
                     Media(
                         type = MediaType.IMAGE,
-                        uri = "android.resource://com.example.instgramtask/drawable/i1"
+                        uri = "android.resource://com.example.instgramtask/drawable/i3"
                     )
                 ),
                 timestamp = System.currentTimeMillis()
@@ -86,12 +86,86 @@ class MockRemoteData @Inject constructor() : ImockRemote {
                 media = listOf(
                     Media(
                         type = MediaType.VIDEO,
+                        uri = "android.resource://com.example.instgramtask/raw/v4",
+                        durationMs = 15000
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),
+            Post(
+                id = "7",
+                username = "Amr",
+                caption = "Hello feed 👋",
+                media = listOf(
+                    Media(
+                        type = MediaType.IMAGE,
+                        uri = "android.resource://com.example.instgramtask/drawable/i1"
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),
+            Post(
+                id = "8",
+                username = "android_daily",
+                caption = "Video time 🎥",
+                media = listOf(
+                    Media(
+                        type = MediaType.VIDEO,
+                        uri = "android.resource://com.example.instgramtask/raw/v5",
+                        durationMs = 15000
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),    Post(
+                id = "9",
+                username = "Amr_dev",
+                caption = "Hello feed 👋",
+                media = listOf(
+                    Media(
+                        type = MediaType.IMAGE,
+                        uri = "android.resource://com.example.instgramtask/drawable/i2"
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),
+            Post(
+                id = "10",
+                username = "android_daily",
+                caption = "Video time 🎥",
+                media = listOf(
+                    Media(
+                        type = MediaType.VIDEO,
                         uri = "android.resource://com.example.instgramtask/raw/v2",
                         durationMs = 15000
                     )
                 ),
                 timestamp = System.currentTimeMillis()
+            ),    Post(
+                id = "11",
+                username = "Amr",
+                caption = "Hello feed 👋",
+                media = listOf(
+                    Media(
+                        type = MediaType.IMAGE,
+                        uri = "android.resource://com.example.instgramtask/drawable/i3"
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),
+            Post(
+                id = "12",
+                username = "android_daily",
+                caption = "Video time 🎥",
+                media = listOf(
+                    Media(
+                        type = MediaType.VIDEO,
+                        uri = "android.resource://com.example.instgramtask/raw/v4",
+                        durationMs = 15000
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
             )
+
         )
 
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.instgramtask.Model.Cache.VideoDataSourceFactory
 import com.example.instgramtask.Model.Media
 import com.example.instgramtask.Model.MediaType
 import com.example.instgramtask.Model.Post
@@ -14,6 +15,7 @@ import com.example.instgramtask.R
 import com.example.instgramtask.databinding.ItemPostBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 
 
 class PostDiff : DiffUtil.ItemCallback<Post>() {
@@ -113,14 +115,21 @@ class FeedAdapter :
             binding.imgPost.visibility = View.GONE
             binding.videoPost.visibility = View.VISIBLE
 
-            player = ExoPlayer.Builder(binding.root.context).build().also {
-                binding.videoPost.player = it
-                it.setMediaItem(MediaItem.fromUri(video.uri))
-                it.prepare()
-                it.playWhenReady = false
-            }
-        }
+            val context = binding.root.context
 
+            player = ExoPlayer.Builder(context)
+                .setMediaSourceFactory(
+                    DefaultMediaSourceFactory(
+                        VideoDataSourceFactory.create(context)
+                    )
+                )
+                .build().also {
+                    binding.videoPost.player = it
+                    it.setMediaItem(MediaItem.fromUri(video.uri))
+                    it.prepare()
+                    it.playWhenReady = false
+                }
+        }
 
         fun play() {
             player?.playWhenReady = true
@@ -130,14 +139,24 @@ class FeedAdapter :
             player?.playWhenReady = false
         }
 
-
-
         fun releasePlayer() {
             player?.release()
             player = null
             binding.videoPost.player = null
         }
     }
+
+//    fun stopAllVideos(recyclerView: RecyclerView) {
+//        for (i in 0 until recyclerView.childCount) {
+//            val holder = recyclerView.getChildViewHolder(
+//                recyclerView.getChildAt(i)
+//            )
+//
+//            if (holder is VideoViewHolder) {
+//                holder.pause()
+//            }
+//        }
+//    }
 
 
 
