@@ -7,14 +7,16 @@ import com.google.gson.reflect.TypeToken
 
 class MediaConverter {
 
+    private val gson = Gson()
+
     @TypeConverter
     fun fromMediaList(media: List<Media>): String {
-        return Gson().toJson(media)
+        return gson.toJson(media)
     }
 
     @TypeConverter
     fun toMediaList(value: String): List<Media> {
         val type = object : TypeToken<List<Media>>() {}.type
-        return Gson().fromJson(value, type)
+        return gson.fromJson(value, type)
     }
 }

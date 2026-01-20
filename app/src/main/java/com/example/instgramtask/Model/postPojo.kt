@@ -11,3 +11,13 @@ data class Post(
     val media: List<Media>,
     val timestamp: Long
 )
+
+data class Media(
+    val type: MediaType,
+    val uri: String,
+    val durationMs: Long? = null
+)
+enum class MediaType {
+    IMAGE,
+    VIDEO
+}

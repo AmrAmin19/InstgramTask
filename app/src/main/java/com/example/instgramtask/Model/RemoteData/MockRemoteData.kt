@@ -1,6 +1,7 @@
 package com.example.instgramtask.Model.RemoteData
 import com.example.instgramtask.Model.ApiState
 import com.example.instgramtask.Model.Media
+import com.example.instgramtask.Model.MediaType
 import com.example.instgramtask.Model.Post
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -23,7 +24,10 @@ class MockRemoteData @Inject constructor() : ImockRemote {
                 username = "zyad_dev",
                 caption = "Hello feed 👋",
                 media = listOf(
-                    Media.Image("android.resource://com.example.instgramtask/drawable/img1")
+                    Media(
+                        type = MediaType.IMAGE,
+                        uri = "android.resource://com.example.instgramtask/drawable/i1"
+                    )
                 ),
                 timestamp = System.currentTimeMillis()
             ),
@@ -32,12 +36,62 @@ class MockRemoteData @Inject constructor() : ImockRemote {
                 username = "android_daily",
                 caption = "Video time 🎥",
                 media = listOf(
-                    Media.Video(
-                        "android.resource://com.example.instgramtask/raw/video1",
-                        15000
+                    Media(
+                        type = MediaType.VIDEO,
+                        uri = "android.resource://com.example.instgramtask/raw/v2",
+                        durationMs = 15000
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),    Post(
+                id = "3",
+                username = "zyad_dev",
+                caption = "Hello feed 👋",
+                media = listOf(
+                    Media(
+                        type = MediaType.IMAGE,
+                        uri = "android.resource://com.example.instgramtask/drawable/i1"
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),
+            Post(
+                id = "4",
+                username = "android_daily",
+                caption = "Video time 🎥",
+                media = listOf(
+                    Media(
+                        type = MediaType.VIDEO,
+                        uri = "android.resource://com.example.instgramtask/raw/v2",
+                        durationMs = 15000
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),    Post(
+                id = "5",
+                username = "zyad_dev",
+                caption = "Hello feed 👋",
+                media = listOf(
+                    Media(
+                        type = MediaType.IMAGE,
+                        uri = "android.resource://com.example.instgramtask/drawable/i1"
+                    )
+                ),
+                timestamp = System.currentTimeMillis()
+            ),
+            Post(
+                id = "6",
+                username = "android_daily",
+                caption = "Video time 🎥",
+                media = listOf(
+                    Media(
+                        type = MediaType.VIDEO,
+                        uri = "android.resource://com.example.instgramtask/raw/v2",
+                        durationMs = 15000
                     )
                 ),
                 timestamp = System.currentTimeMillis()
             )
         )
+
 }

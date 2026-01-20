@@ -77,6 +77,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
+    implementation( "androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
+
+
 
 }
 
