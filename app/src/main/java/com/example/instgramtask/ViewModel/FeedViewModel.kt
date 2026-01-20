@@ -3,6 +3,7 @@ package com.example.instgramtask.ViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instgramtask.Model.ApiState
+import com.example.instgramtask.Model.Irepo
 import com.example.instgramtask.Model.Post
 import com.example.instgramtask.Model.Repo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(
-    private val repo: Repo
+    private val repo: Irepo
 ) : ViewModel() {
 
     private val _posts =

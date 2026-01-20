@@ -9,18 +9,18 @@ import javax.inject.Inject
 class Repo @Inject constructor(
     private val remote: ImockRemote,
     private val local: ILocal
-) {
+) :Irepo {
 
 
 
-    fun getPosts(): Flow<ApiState<List<Post>>> = flow {
+    override fun getPosts(): Flow<ApiState<List<Post>>> = flow {
         emit(ApiState.Loading)
 
-        val cached = local.getCachedPosts()
-        if (cached.isNotEmpty()) {
-            emit(ApiState.Success(cached))
-            return@flow
-        }
+//        val cached = local.getCachedPosts()
+//        if (cached.isNotEmpty()) {
+//            emit(ApiState.Success(cached))
+//            return@flow
+//        }
 
         remote.getPosts().collect { state ->
             if (state is ApiState.Success) {

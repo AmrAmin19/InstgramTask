@@ -2,6 +2,7 @@ package com.example.instgramtask.Model.dl
 
 import android.content.Context
 import androidx.room.Room
+import com.example.instgramtask.Model.Irepo
 import com.example.instgramtask.Model.LocalData.AppDatabase
 import com.example.instgramtask.Model.LocalData.ILocal
 import com.example.instgramtask.Model.LocalData.LocalData
@@ -45,9 +46,8 @@ object AppModule {
         MockRemoteData()
 
     @Provides
-
     fun provideRepo(
         remote: ImockRemote,
         local: ILocal
-    ): Repo = Repo(remote, local)
+    ): Irepo = Repo(remote, local)
 }
